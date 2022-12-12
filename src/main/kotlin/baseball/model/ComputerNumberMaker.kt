@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms
 
 class ComputerNumberMaker {
 
-    fun makeComputerNumber(): List<Int> {
+    fun makeComputerNumber(): String {
         val computer = mutableListOf<Int>()
         while (computer.size < 3) {
             val randomNumber = Randoms.pickNumberInRange(1, 9)
@@ -12,6 +12,6 @@ class ComputerNumberMaker {
                 computer.add(randomNumber)
             }
         }
-        return computer
+        return computer.toString()
     }
 }
