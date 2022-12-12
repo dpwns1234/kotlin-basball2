@@ -7,10 +7,19 @@ class InputView {
     private val inputRule = InputRule()
     fun userNumbers(): String {
         while (true) {
-
             val input = Console.readLine()
-            kotlin.runCatching { inputRule.checkNumbers(input) } // TODO 유저 숫자 체크하는 함수 작성
+            kotlin.runCatching { inputRule.checkNumbers(input) }
                 .onSuccess { return input }
+                .onFailure { e -> OutputView().printErrorMessage(e.message) }
+        }
+    }
+
+    fun restart(): Boolean {
+        while(true) {
+            var isRestart = true
+            val input = Console.readLine()
+            kotlin.runCatching { isRestart = inputRule.checkRestart(input) }
+                .onSuccess { return  isRestart }
                 .onFailure { e -> OutputView().printErrorMessage(e.message) }
         }
     }
