@@ -1,25 +1,29 @@
 package baseball.model
 
-class InputRule {
-/*
+import baseball.utils.Constants.ERROR_NO_THREE_DIGIT
+import baseball.utils.Constants.ERROR_OUT_OF_FORMAT
+import baseball.utils.Constants.ERROR_OUT_OF_RANGE
+import baseball.utils.Constants.ERROR_REDUPLICATED_NUMBER
+import baseball.utils.Constants.NUMBER_LENGTH
+import baseball.utils.Constants.NUMBER_OF_OUT_OF_RANGE
+import baseball.utils.Constants.QUIT
+import baseball.utils.Constants.RETRY
 
-    - [ ] 서로 다른 3개의 숫자를 입력
-    - [ ] [ERROR] 1-9 범위 벗어남, 중복되는 자리수, 3개가 아님
- */
+class InputRule {
     fun checkNumbers(input: String) {
-        if(input.length != 3)
-            throw IllegalArgumentException("[ERROR] 3자리 입력하셈")
-        if(input.toSet().size != 3)
-            throw IllegalArgumentException("[ERROR] 중복되는 숫자가 있습니다.")
-        if(input.contains('0'))
-            throw IllegalArgumentException("[ERROR] 1-9의 범위를 지켜주세요")
+        if(input.length != NUMBER_LENGTH)
+            throw IllegalArgumentException(ERROR_NO_THREE_DIGIT)
+        if(input.toSet().size != NUMBER_LENGTH)
+            throw IllegalArgumentException(ERROR_REDUPLICATED_NUMBER)
+        if(input.contains(NUMBER_OF_OUT_OF_RANGE))
+            throw IllegalArgumentException(ERROR_OUT_OF_RANGE)
     }
 
     fun checkRestart(input: String): Boolean {
         return when (input) {
-            "1" -> true
-            "2" -> false
-            else -> throw IllegalArgumentException("[ERROR] 1 또는 2를 입력해주세요.")
+            RETRY -> true
+            QUIT -> false
+            else -> throw IllegalArgumentException(ERROR_OUT_OF_FORMAT)
         }
 
     }

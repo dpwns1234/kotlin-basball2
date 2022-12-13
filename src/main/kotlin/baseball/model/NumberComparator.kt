@@ -1,8 +1,6 @@
 package baseball.model
 
 class NumberComparator(private val computerNumbers: List<Int>) {
-
-    // (algorithm -> ball = contains() - strikeNum)
     fun compareNumbers(userNumbers: String): Pair<Int, Int> {
         val strikeNum = calculateStrikeNum(userNumbers)
         val reduplicatedNum = calculateReduplicatedNum(userNumbers)
@@ -14,7 +12,7 @@ class NumberComparator(private val computerNumbers: List<Int>) {
     private fun calculateStrikeNum(userNumbers: String): Int {
         var count = 0
         for(i in userNumbers.indices) {
-            if(computerNumbers[i] == userNumbers[i] - '0')
+            if(computerNumbers[i] == userNumbers[i].digitToInt())
                 count++
         }
         return count
@@ -23,7 +21,7 @@ class NumberComparator(private val computerNumbers: List<Int>) {
     private fun calculateReduplicatedNum(userNumbers: String): Int {
         var count = 0
         for(number in userNumbers) {
-            if(computerNumbers.contains(number - '0'))
+            if(computerNumbers.contains(number.digitToInt()))
                 count++
         }
         return count
